@@ -1,4 +1,4 @@
-module gitlab.com/clabz-io/cfg
+module github.com/clabz-io/cfg
 
 go 1.22.2
 
