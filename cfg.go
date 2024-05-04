@@ -9,24 +9,23 @@ import (
 )
 
 type Config struct {
-	Environment string `mapstructure:"ENVIRONMENT"`
-	Host        string `mapstructure:"HOST"`
-	Port        string `mapstructure:"PORT"`
-
-	DBUsername string `mapstructure:"MYSQL_USER"`
-	DBPassword string `mapstructure:"MYSQL_PASS"`
-	DBHost     string `mapstructure:"MYSQL_HOST"`
-	DBPort     string `mapstructure:"MYSQL_PORT"`
-	DBName     string `mapstructure:"MYSQL_DB"`
-	DBNameTest string `mapstructure:"MYSQL_DB_TEST"`
-	DBUrl      string
-
-	ApiSecret           string        `mapstructure:"API_SECRET"`
-	AccessTokenDuration time.Duration `mapstructure:"TOKEN_HOUR_LIFESPAN"`
-	// RefreshTokenDuration time.Duration `mapstructure:"REFRESH_TOKEN_DURATION"`
-
-	TypesenseAddr   string `mapstructure:"TYPESENSE_ADDR"`
+	ApiSecret       string `mapstructure:"API_SECRET"`
+	DBHost          string `mapstructure:"MYSQL_HOST"`
+	DBName          string `mapstructure:"MYSQL_DB"`
+	DBNameTest      string `mapstructure:"MYSQL_DB_TEST"`
+	DBPassword      string `mapstructure:"MYSQL_PASS"`
+	DBPort          string `mapstructure:"MYSQL_PORT"`
+	DBUrl           string `mapstructure:"MYSQL_DB_URL"`
+	AppDomain       string `mapstructure:"APP_DOMAIN"`
+	DBUsername      string `mapstructure:"MYSQL_USER"`
+	Environment     string `mapstructure:"ENVIRONMENT"`
+	Host            string `mapstructure:"HOST"`
+	Port            string `mapstructure:"PORT"`
 	TypesenseAPIKEY string `mapstructure:"TYPESENSE_APIKEY"`
+	TypesenseAddr   string `mapstructure:"TYPESENSE_ADDR"`
+
+	AccessTokenDuration  time.Duration `mapstructure:"TOKEN_HOUR_LIFESPAN"`
+	RefreshTokenDuration time.Duration `mapstructure:"REFRESH_TOKEN_DURATION"`
 }
 
 func LoadConfig(name string, path string) (config Config) {
@@ -40,6 +39,7 @@ func LoadConfig(name string, path string) (config Config) {
 		log.Fatalf("config: %v", err)
 		return
 	}
+
 	if err := viper.Unmarshal(&config); err != nil {
 		fmt.Printf("config = %+v\n", config)
 		log.Fatalf("config: %v", err)
